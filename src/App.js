@@ -3,6 +3,8 @@ import React from 'react';
 import './App.css';
 import Search from './Search';
 import Shelf from './Shelf';
+import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class BooksApp extends React.Component {
   state = {
@@ -18,8 +20,11 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <Search />
-        <div className="list-books">
+        <Route path='/search' render={() => (
+          <Search />
+        )} />
+        <Route exact path='/' render={() => (
+          <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
           </div>
@@ -29,9 +34,10 @@ class BooksApp extends React.Component {
             </div>
           </div>
           <div className="open-search">
-            <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+            <Link className="open-search-link" to='/search'>Add a book</Link>
           </div>
         </div>
+        )} />
       </div>
     )
   }
