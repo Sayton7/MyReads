@@ -27,7 +27,18 @@ const BooksApp = () => {
         </div>
         <div className="list-books-content">
           <div>
-            <Shelf />
+            <Shelf
+            title="Want to Read"
+            books={books.filter(book => book.shelf === "wantToRead")}
+            />
+            <Shelf
+            title="Currently Reading"
+            books={books.filter(book => book.shelf === "currentlyReading")}
+            />
+            <Shelf
+            title="Read"
+            books={books.filter(book => book.shelf === "read")}
+            />
           </div>
         </div>
         <div className="open-search">
