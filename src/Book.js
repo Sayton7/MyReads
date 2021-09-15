@@ -17,7 +17,7 @@ const Book = props => {
                     </div>
                   </div>
                   <div className="book-title">{props.book.title}</div>
-                  <div className="book-authors">{(props.book.authors[1] ?
+                  <div className="book-authors">{(props.book.authors && props.book.authors > 1 ?
                     props.book.authors.join(", ") : props.book.authors)}</div>
             </div>
         </li>

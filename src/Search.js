@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
-import { useState, useEffect } from "react/cjs/react.development";
+import Book from "./Book";
 
 const Search = props => {
 
@@ -9,8 +9,12 @@ const Search = props => {
   const [query, setQuery] =useState('');
 
   useEffect(() => {
-    BooksAPI.search(query)
-    .then((searchedBooks) => {setSearchedBooks(searchedBooks)})
+    if (query !== '') {
+      BooksAPI.search(query)
+      .then((searchedBooks) => {setSearchedBooks(searchedBooks)})
+    } else {
+      setSearchedBooks('')
+    }
   }, [query]);
 
   return (
@@ -36,7 +40,13 @@ const Search = props => {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-              
+            {searchedBooks && searchedBooks.length > 1 &&
+            searchedBooks.map(book => (
+              <Book
+              key={book.id}
+              book={book}
+              /> 
+            ))}
             </ol>
           </div>
         </div>
