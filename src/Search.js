@@ -45,6 +45,7 @@ const Search = props => {
               <Book
               key={book.id}
               book={book}
+              updateShelf={props.updateShelf}
               /> 
             ))}
             </ol>

@@ -11,9 +11,9 @@ const Shelf = props => {
                 <Book
                 key={book.id}
                 book={book}
+                updateShelf={props.updateShelf}
                 />
               ))}
-              
             </ol>
           </div>
         </div>

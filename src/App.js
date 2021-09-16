@@ -13,12 +13,26 @@ const BooksApp = () => {
   useEffect(() => {
     BooksAPI.getAll()
     .then((books) => {setBooks(books)})
-  });
+  },[books]);
+
+  const onUpdateShelf = (updatedBook, shelf) => {
+    books.map((book) => {
+      if (book.id === updatedBook.id) {
+        book.shelf = shelf
+      } else {
+        books.push(updatedBook)
+      }
+      return BooksAPI.update(updatedBook, shelf)
+      .then(setBooks(books))
+    })
+  }
 
   return (
     <div className="app">
       <Route path='/search' render={() => (
-        <Search />
+        <Search
+        updateShelf={onUpdateShelf}
+        />
       )} />
       <Route exact path='/' render={() => (
         <div className="list-books">
@@ -30,14 +44,17 @@ const BooksApp = () => {
             <Shelf
             title="Want to Read"
             books={books.filter(book => book.shelf === "wantToRead")}
+            updateShelf={onUpdateShelf}
             />
             <Shelf
             title="Currently Reading"
             books={books.filter(book => book.shelf === "currentlyReading")}
+            updateShelf={onUpdateShelf}
             />
             <Shelf
             title="Read"
             books={books.filter(book => book.shelf === "read")}
+            updateShelf={onUpdateShelf}
             />
           </div>
         </div>
