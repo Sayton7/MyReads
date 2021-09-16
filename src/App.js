@@ -32,6 +32,7 @@ const BooksApp = () => {
       <Route path='/search' render={() => (
         <Search
         updateShelf={onUpdateShelf}
+        booksOnShelf={books}
         />
       )} />
       <Route exact path='/' render={() => (

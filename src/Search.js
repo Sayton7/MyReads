@@ -11,11 +11,27 @@ const Search = props => {
   useEffect(() => {
     if (query !== '') {
       BooksAPI.search(query)
-      .then((searchedBooks) => {setSearchedBooks(searchedBooks)})
+      .then((searchedBooks) => {
+        if (searchedBooks && searchedBooks.length > 0) {
+          for (let i = 0; i < searchedBooks.length; i++) {
+            for (let j = 0; j < props.booksOnShelf.length; j++) {
+              if (searchedBooks[i].id === props.booksOnShelf[j].id) {
+                searchedBooks[i].shelf = props.booksOnShelf[j].shelf
+              }
+            }
+          }
+        }
+        setSearchedBooks(searchedBooks)
+      })
     } else {
-      setSearchedBooks('')
+      setSearchedBooks([])
     }
-  }, [query]);
+
+    // return () => {
+    //   setQuery([])
+    // }
+
+  }, [query, props.booksOnShelf]);
 
   return (
       <div className="search-books">
@@ -40,7 +56,7 @@ const Search = props => {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-            {searchedBooks && searchedBooks.length > 1 &&
+            {searchedBooks && searchedBooks.length > 0 &&
             searchedBooks.map(book => (
               <Book
               key={book.id}
