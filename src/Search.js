@@ -29,7 +29,8 @@ const Search = props => {
 
     return () => (mounted = false);
 
-  }, [query, props.booksOnShelf]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
   return (
       <div className="search-books">
