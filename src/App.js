@@ -15,14 +15,15 @@ const BooksApp = () => {
   },[books]);
 
   const onUpdateShelf = (updatedBook, shelf) => {
-    books.map((book) => {
+    const newList = books;
+    newList.map((book) => {
       if (book.id === updatedBook.id) {
         book.shelf = shelf
       } else {
-        books.push(updatedBook)
+        newList.push(updatedBook)
       }
       return BooksAPI.update(updatedBook, shelf)
-      .then(setBooks(books))
+      .then(setBooks(newList))
     })
   }
 
