@@ -1,5 +1,13 @@
 # MyReads Project
 
+* A book reading app acts as a book library showing you the list of your books on three different shelves (Want to Read, Currently Reading, Read).
+* Each book has a selection button to change it's shelf based on the user's preference.
+* The app has a search page that allows the user to look for new books using Udacity's BookAPI and add any book he likes to one of the three shelves available.
+* The app was built using React library.
+
+
+## General Information
+
 This is the first project in Udacity's Advanced Web Development course. the project was created using create-react-app but then used the starter template for the final assessment files to start working on the project.
 
 ## TL;DR
