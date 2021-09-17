@@ -10,10 +10,11 @@ const Search = props => {
   const [query, setQuery] =useState('');
 
   useEffect(() => {
-    if (query !== '') {
+    let mounted = true;
+    if (query !== '' && mounted) {
       BooksAPI.search(query)
       .then((searchedBooks) => {
-        if (searchedBooks && searchedBooks.length > 0) {
+        if (searchedBooks && searchedBooks.length > 0 && mounted) {
           const withShelves = searchedBooks.map(book => {
             const found = props.booksOnShelf.find(({ id }) => id === book.id);
             book.shelf = found ? found.shelf : "none"
@@ -26,9 +27,7 @@ const Search = props => {
       setSearchedBooks([])
     }
 
-    // return () => {
-    //   setQuery([])
-    // }
+    return () => (mounted = false);
 
   }, [query, props.booksOnShelf]);
 
