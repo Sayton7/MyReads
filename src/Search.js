@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import Book from "./Book";
+import propTypes from 'prop-types';
 
 const Search = props => {
 
@@ -66,6 +67,11 @@ const Search = props => {
           </div>
         </div>
   )
+}
+
+Search.propTypes = {
+  updateShelf : propTypes.func.isRequired,
+  booksOnShelf : propTypes.array.isRequired,
 }
 
 export default Search;
