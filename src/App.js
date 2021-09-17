@@ -11,19 +11,16 @@ const BooksApp = () => {
 
   useEffect(() => {
     BooksAPI.getAll()
-    .then((books) => {setBooks(books)})
-  },[books]);
+    .then((res) => {setBooks(res)})
+  },[]);
 
   const onUpdateShelf = (updatedBook, shelf) => {
-    const newList = books;
-    newList.map((book) => {
-      if (book.id === updatedBook.id) {
-        book.shelf = shelf
-      } else {
-        newList.push(updatedBook)
-      }
-      return BooksAPI.update(updatedBook, shelf)
-      .then(setBooks(newList))
+
+    updatedBook.shelf = shelf;
+
+    BooksAPI.update(updatedBook, shelf)
+    .then(() => {
+      setBooks(books.filter(b => b.id !== updatedBook.id).concat([updatedBook]))
     })
   }
 
