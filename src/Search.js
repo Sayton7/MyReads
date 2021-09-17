@@ -13,15 +13,13 @@ const Search = props => {
       BooksAPI.search(query)
       .then((searchedBooks) => {
         if (searchedBooks && searchedBooks.length > 0) {
-          for (let i = 0; i < searchedBooks.length; i++) {
-            for (let j = 0; j < props.booksOnShelf.length; j++) {
-              if (searchedBooks[i].id === props.booksOnShelf[j].id) {
-                searchedBooks[i].shelf = props.booksOnShelf[j].shelf
-              }
-            }
-          }
+          const withShelves = searchedBooks.map(book => {
+            const found = props.booksOnShelf.find(({ id }) => id === book.id);
+            book.shelf = found ? found.shelf : "none"
+            return book
+          })
+          setSearchedBooks(withShelves)
         }
-        setSearchedBooks(searchedBooks)
       })
     } else {
       setSearchedBooks([])
